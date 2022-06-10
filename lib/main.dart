@@ -1,14 +1,25 @@
-import 'dart:ui';
+import 'package:covid_info/home/CounterWidget.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import 'home/NewsFeedWidget.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  var infetti = 0;
+  var morti = 0;
+  var guariti = 0;
 
   // This widget is the root of your application.
   @override
@@ -79,7 +90,7 @@ class HomePage extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 30),
+          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
           child: Column(children: <Widget>[
             Row(
               children: <Widget>[
@@ -108,7 +119,7 @@ class HomePage extends StatelessWidget {
           ]),
         ),
         const SizedBox(
-          height: 20,
+          height: 5,
         ),
         Container(
           padding: const EdgeInsets.all(20),
@@ -128,69 +139,48 @@ class HomePage extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Counter(
+              CounterWidget(
                 number: 1655,
                 color: Colors.orange,
                 title: "Infetti",
               ),
-              Counter(
+              CounterWidget(
                 number: 325,
                 color: Colors.red,
                 title: "Morti",
               ),
-              Counter(
+              CounterWidget(
                 number: 636,
                 color: Colors.green,
                 title: "Guariti",
-              )
+              ),
             ],
           ),
-        )
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        NewsFeedWidget()
       ]),
     );
   }
 }
 
-class Counter extends StatelessWidget {
-  final int number;
-  final Color color;
-  final String title;
+class NewsList extends StatelessWidget {
+  NewsList({Key? key, required this.news}) : super(key: key);
 
-  const Counter({
-    Key? key,
-    required this.number,
-    required this.color,
-    required this.title,
-  }) : super(key: key);
+  final List<String> news;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Container(
-          padding: EdgeInsets.all(6),
-          height: 25,
-          width: 25,
-          decoration: BoxDecoration(
-              shape: BoxShape.circle, color: color.withOpacity(.26)),
-          child: Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.transparent,
-              border: Border.all(color: color, width: 2),
-            ),
-          ),
-        ),
-        const SizedBox(height: 10),
-        Text(
-          "$number",
-          style: TextStyle(color: color, fontSize: 35),
-        ),
-        Text(
-          "$title",
-          style: TextStyle(color: Colors.grey),
-        )
-      ],
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+      ),
+      itemCount: news.length,
+      itemBuilder: (context, index) {
+        return Text(news[index]);
+      },
     );
   }
 }
