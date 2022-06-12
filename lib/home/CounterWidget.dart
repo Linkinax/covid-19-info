@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+final value = NumberFormat("#,###", "en_US");
 
 class CounterWidget extends StatefulWidget {
   final int number;
@@ -37,8 +40,8 @@ class _CounterWidgetState extends State<CounterWidget> {
         ),
         const SizedBox(height: 10),
         Text(
-          "${widget.number}",
-          style: TextStyle(color: widget.color, fontSize: 35),
+          "${value.format(widget.number)}",
+          style: TextStyle(color: widget.color, fontSize: 20),
         ),
         Text(
           "${widget.title}",

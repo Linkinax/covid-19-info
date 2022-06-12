@@ -12,7 +12,7 @@ class NewsFeedWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: jH.getJsonCasi(),
+      future: jH.getJsonNotizie(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           print(snapshot.hasError);
