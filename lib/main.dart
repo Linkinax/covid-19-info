@@ -3,6 +3,7 @@ import 'package:covid_info/home/CounterWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import 'home/CounterGroup.dart';
 import 'home/NewsFeedWidget.dart';
 
 void main() {
@@ -136,26 +137,7 @@ class HomePage extends StatelessWidget {
                   color: Color.fromARGB(255, 209, 209, 209)),
             ],
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              CounterWidget(
-                number: 1655,
-                color: Colors.orange,
-                title: "Infetti",
-              ),
-              CounterWidget(
-                number: 325,
-                color: Colors.red,
-                title: "Morti",
-              ),
-              CounterWidget(
-                number: 636,
-                color: Colors.green,
-                title: "Guariti",
-              ),
-            ],
-          ),
+          child: const CounterGroup(),
         ),
         const SizedBox(
           height: 5,
