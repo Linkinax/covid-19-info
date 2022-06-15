@@ -9,7 +9,7 @@ class JsonParser {
     print("Parsing json....\n");
     print(jsonNews);
 
-    nc = NumeroCasi(jsonNews[0]['nuovi_positivi'], jsonNews[0]['deceduti'],
+    nc = NumeroCasi(jsonNews[0]['totale_positivi'], jsonNews[0]['deceduti'],
         jsonNews[0]['dimessi_guariti']);
   }
 
