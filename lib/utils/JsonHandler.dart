@@ -15,17 +15,17 @@ class JsonHandler {
     //print('Response body: ${response.body}');
 
     var jsonCasi = jsonDecode(response.body);
-    print(jsonCasi);
+    //print(jsonCasi);
     return jsonCasi;
   }
 
   Future getJsonNotizie() async {
     var url = Uri.parse(_urlNotizie);
     var response = await http.get(url);
-    print('Response status: ${response.statusCode}');
+    //print('Response status: ${response.statusCode}');
 
     var jsonNews = jsonDecode(response.body);
-    print(jsonNews);
+    //print(jsonNews);
 
     return jsonNews;
   }

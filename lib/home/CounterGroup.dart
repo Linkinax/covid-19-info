@@ -20,10 +20,12 @@ class GroupRow extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<GroupRow> createState() => _GroupRowState();
+  State<GroupRow> createState() => _InitState();
+
+  State<GroupRow> initState() => _InitState();
 }
 
-class _GroupRowState extends State<GroupRow> {
+class _InitState extends State<GroupRow> {
   final JsonHandler jh = JsonHandler();
   var infected = 0;
   var healed = 0;
@@ -39,10 +41,6 @@ class _GroupRowState extends State<GroupRow> {
           healed = jP.getHealed(),
           deaths = jP.getDeaths()
         });
-  }
-
-  int getInfected() {
-    return infected;
   }
 
   @override
@@ -89,6 +87,18 @@ class _GroupRowState extends State<GroupRow> {
           );
         }
       },
+    );
+  }
+}
+
+class _GroupRowState extends State<GroupRow> {
+  @override
+  Widget build(BuildContext context) {
+    setState(() {
+      _InitState();
+    });
+    return const Center(
+      child: CircularProgressIndicator(),
     );
   }
 }

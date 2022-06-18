@@ -137,32 +137,13 @@ class HomePage extends StatelessWidget {
                   color: Color.fromARGB(255, 209, 209, 209)),
             ],
           ),
-          child: const CounterGroup(),
+          child: CounterGroup(),
         ),
         const SizedBox(
           height: 5,
         ),
         NewsFeedWidget()
       ]),
-    );
-  }
-}
-
-class NewsList extends StatelessWidget {
-  NewsList({Key? key, required this.news}) : super(key: key);
-
-  final List<String> news;
-
-  @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-      ),
-      itemCount: news.length,
-      itemBuilder: (context, index) {
-        return Text(news[index]);
-      },
     );
   }
 }
