@@ -25,7 +25,7 @@ class JsonHandler {
     //print('Response status: ${response.statusCode}');
 
     var jsonNews = jsonDecode(response.body);
-    //print(jsonNews);
+    print(jsonNews);
 
     return jsonNews;
   }

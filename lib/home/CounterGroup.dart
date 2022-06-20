@@ -20,33 +20,39 @@ class GroupRow extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<GroupRow> createState() => _InitState();
-
-  State<GroupRow> initState() => _InitState();
+  State<GroupRow> createState() => _GroupRowState();
 }
 
-class _InitState extends State<GroupRow> {
+class _GroupRowState extends State<GroupRow> {
   final JsonHandler jh = JsonHandler();
+
   var infected = 0;
   var healed = 0;
   var deaths = 0;
 
-  Future readJson() async {
-    var jh = JsonHandler();
-    var jP;
-    jh.getJsonCasi().then((value) => {
-          jP = JsonParser(value),
-          print("\n\ncasi:\t" + jP.getInfected().toString()),
-          infected = jP.getInfected(),
-          healed = jP.getHealed(),
-          deaths = jP.getDeaths()
+  @override
+  void initState() {
+    jh.getJsonCasi().then((onValue) => {
+          print('Setting the initial state...'),
+          print(onValue),
+          _setNumberCases(onValue)
         });
+    super.initState();
+  }
+
+  void _setNumberCases(onValue) {
+    JsonParser jp = JsonParser(onValue);
+    print("\n\ncasi:\t" + jp.getInfected().toString());
+    infected = jp.getInfected();
+    healed = jp.getHealed();
+    deaths = jp.getDeaths();
+
+    print(
+        "updated I=${infected.toString()} H=${healed.toString()} D= ${deaths.toString()} ");
   }
 
   @override
   Widget build(BuildContext context) {
-    readJson();
-
     return FutureBuilder(
       future: jh.getJsonCasi(),
       builder: (context, snapshot) {
@@ -87,18 +93,6 @@ class _InitState extends State<GroupRow> {
           );
         }
       },
-    );
-  }
-}
-
-class _GroupRowState extends State<GroupRow> {
-  @override
-  Widget build(BuildContext context) {
-    setState(() {
-      _InitState();
-    });
-    return const Center(
-      child: CircularProgressIndicator(),
     );
   }
 }

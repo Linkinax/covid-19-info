@@ -1,45 +1,19 @@
-import 'package:covid_info/home/CounterWidget.dart';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 
-import 'home/CounterGroup.dart';
-import 'home/NewsFeedWidget.dart';
+class UpperWidget extends StatelessWidget {
+  final now = DateTime.now();
+  final formatter = DateFormat('yyyy-MM-dd');
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Info covid-19',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: HomePage(),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  var now = new DateTime.now();
-  var formatter = DateFormat('yyyy-MM-dd');
+  UpperWidget({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(children: <Widget>[
+    return Container(
+      child: Column(children: <Widget>[
         ClipPath(
           clipper: MyClipper(),
           child: Container(
@@ -119,30 +93,6 @@ class HomePage extends StatelessWidget {
             ),
           ]),
         ),
-        const SizedBox(
-          height: 5,
-        ),
-        Container(
-          padding: const EdgeInsets.all(20),
-          margin: const EdgeInsets.symmetric(horizontal: 20),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(
-              20,
-            ),
-            color: Colors.white,
-            boxShadow: const [
-              BoxShadow(
-                  offset: Offset(0, 4),
-                  blurRadius: 25,
-                  color: Color.fromARGB(255, 209, 209, 209)),
-            ],
-          ),
-          child: CounterGroup(),
-        ),
-        const SizedBox(
-          height: 5,
-        ),
-        NewsFeedWidget()
       ]),
     );
   }
